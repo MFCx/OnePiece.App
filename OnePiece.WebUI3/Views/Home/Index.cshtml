@@ -1,4 +1,5 @@
-﻿@model List<OnePiece.WebUI3.Models.CharacterListModel>
+﻿@using OnePiece.Entities.Database
+@model List<OnePiece.WebUI3.Models.CharacterListModel>
 
 @{
     ViewBag.Title = "Home Page";
@@ -10,15 +11,16 @@
     <article class="hentry">
         <header class="entry-header">
             <div class="entry-thumbnail">
-                <a href="/Home/CharacterDetail"><img src="~/wwwroot/images/Characters/@item.MainPicture" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="@item.CharacterName" /></a>
-             @*@Html.ActionLink(@item.CharacterName,"CharacterDetail","Home")*@
+                <a href="/Home/CharacterDetail/@item.CharacterId"><img src="/wwwroot/images/Characters/@item.MainPicture" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="@item.CharacterName" /></a>
+                @*@Html.ActionLink(@item.CharacterName,"CharacterDetail","Home")*@
             </div>
-            <h2 class="entry-title"><a href='/Home/CharacterDetail' rel="bookmark">@item.CharacterName</a></h2>
-            <a class='portfoliotype' href='~/wwwroot/Template/Moschino Free Website Template - Free-CSS.com/HTML-Moschino1.0.0/about.html">~/wwwroot/Template/Moschino Free Website Template - Free-CSS.com/HTML-Moschino1.0.0/about.html'>@item.CharacterPower</a>
-            <a class='portfoliotype' href='portfolio-category.html'>@item.TayfaName</a>
+            <div>
+                <h2 class="entry-title"><a href='/Home/CharacterDetail/@item.CharacterId' rel="bookmark">@item.CharacterName</a></h2>
+                <a class='portfoliotype' href='~/wwwroot/Template/Moschino Free Website Template - Free-CSS.com/HTML-Moschino1.0.0/about.html">~/wwwroot/Template/Moschino Free Website Template - Free-CSS.com/HTML-Moschino1.0.0/about.html'>@item.CharacterPower</a>
+                <a class='portfoliotype' href='/Home/TayfalarDetail/@item.TayfaId'>@item.TayfaName</a>
+
+            </div>
+            
         </header>
-
-
-
     </article>
 }

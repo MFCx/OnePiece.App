@@ -43,5 +43,10 @@ namespace OnePiece.Business.Concrete
         {
             return _tayfaDal.Update(entity);
         }
+
+        public Tayfalar TayfaveCharacter(Expression<Func<Tayfalar, bool>> filter)
+        {
+            return _tayfaDal.TayfaveCharacter(filter);
+        }
     }
 }

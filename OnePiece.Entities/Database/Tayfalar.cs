@@ -24,6 +24,7 @@ namespace OnePiece.Entities.Database
     
         public int TayfaId { get; set; }
         public string TayfaName { get; set; }
+        public string TayfaImage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Character> Characters { get; set; }

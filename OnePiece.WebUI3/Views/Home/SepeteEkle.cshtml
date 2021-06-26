@@ -1,0 +1,29 @@
+﻿@model List<OnePiece.WebUI3.Models.AddToCartModel>
+@{
+    ViewBag.Title = "SepeteEkle";
+
+}
+<article>
+    @foreach (var hadi in Model)
+    {
+        <td></td>
+        <img width="100"src="~/wwwroot/images/Characters/@hadi.MainPicture" />
+        <br />
+        <td>Fiyat:</td>
+        @hadi.CharacterBounty
+        <br />
+        <td>CharacterName:</td>
+        @hadi.CharacterName
+        <br />
+        <td> CharacterId:</td>
+        @hadi.CharacterId
+        <br />
+        <td>Order:</td>
+        @hadi.OrderId
+        <br />
+
+    }
+</article>
+
+
+

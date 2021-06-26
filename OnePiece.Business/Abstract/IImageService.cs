@@ -5,5 +5,5 @@ namespace OnePiece.Business.Abstract
     public interface IImageService:IGenericService<Image>
     {
         
-    }
+    }  
 }

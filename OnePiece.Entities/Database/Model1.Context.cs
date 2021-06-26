@@ -13,10 +13,10 @@ namespace OnePiece.Entities.Database
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class OnePieceDbContext1 : DbContext
+    public partial class OnePieceDbContext : DbContext
     {
-        public OnePieceDbContext1()
-            : base("name=OnePieceDbContext1")
+        public OnePieceDbContext()
+            : base("name=OnePieceDbContext")
         {
             Configuration.LazyLoadingEnabled = false;
         }
@@ -28,7 +28,10 @@ namespace OnePiece.Entities.Database
     
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Character> Characters { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<Order_Details> Order_Details { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Tayfalar> Tayfalars { get; set; }
     }

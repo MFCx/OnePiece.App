@@ -1,0 +1,35 @@
+﻿
+@model OnePiece.Entities.Database.Tayfalar
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-3">
+            <a href="/Home/TayfalarDetail/@Model.TayfaId"><img src="~/wwwroot/images/Tayfalar/@Model.TayfaImage" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="@Model.TayfaName" /></a>
+            <h2 class="entry-title"><a href='/Home/TayfalarDetail/@Model.TayfaId' rel="bookmark">@Model.TayfaName</a></h2>
+        </div>
+
+        <div class="col-md-6">
+            @foreach (var karakter in @Model.Characters)
+            {
+                <div class="column column-width-one-third">
+                    <p>
+                        <a href="/Home/CharacterDetail/@karakter.CharacterId"> <img width="100" height="150" class="card-img-top" src="~/wwwroot/images/Characters/@karakter.MainPicture" alt="@karakter.CharacterName"> </a>
+                    </p>
+                    <p>
+                        @karakter.CharacterName
+                    </p>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -13,7 +13,7 @@ namespace OnePiece.DataAccess.Concrete.EntityFramework
     {
         public List<Character> HakiKullananKarakterler(Expression<Func<Character, bool>> filter)
         {
-            using (var context = new OnePieceDbContext1())
+            using (var context = new OnePieceDbContext())
             {
                 return context.Set<Character>().Where(filter).ToList();
             }
@@ -21,7 +21,7 @@ namespace OnePiece.DataAccess.Concrete.EntityFramework
 
         public List<Character> GetirCharacterTayfaIle(Expression<Func<Character, bool>> filter = null)
         {
-            using (var context = new OnePieceDbContext1())
+            using (var context = new OnePieceDbContext())
             {
                 return context.Set<Character>().
                     Include(x => x.Tayfalar).
@@ -29,7 +29,20 @@ namespace OnePiece.DataAccess.Concrete.EntityFramework
             }
         }
 
-
-
+        public Character resimlerleCharacter(Expression<Func<Character, bool>> filter)
+        {
+            using (var context = new OnePieceDbContext())
+            {
+                return context.Set<Character>().Include(x=>x.Images).Include(x=>x.Tayfalar).FirstOrDefault(filter);
+            }
+        }  
+        public Character CharacterSatinAl(Expression<Func<Character, bool>> filter)
+        {
+            using (var context = new OnePieceDbContext())
+            {
+                return context.Set<Character>().Include(x => x.Order_Details.Select(y => y.Order))
+                    .FirstOrDefault(filter);
+            }
+        }
     }
 }

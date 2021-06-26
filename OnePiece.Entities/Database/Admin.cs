@@ -7,14 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using OnePiece.Entities.Abstract;
-
 namespace OnePiece.Entities.Database
 {
+    using OnePiece.Entities.Abstract;
     using System;
     using System.Collections.Generic;
     
-    public partial class Admin : IEntity
+    public partial class Admin:IEntity
     {
         public int AdminId { get; set; }
         public string AdminName { get; set; }

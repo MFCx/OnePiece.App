@@ -1,0 +1,26 @@
+﻿@using OnePiece.Entities.Database
+@model List<OnePiece.Entities.Database.Tayfalar>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    <article class="hentry">
+        <header class="entry-header">
+            <div class="entry-thumbnail">
+                <a href="/Home/TayfalarDetail/@item.TayfaId"><img src="~/wwwroot/images/Tayfalar/@item.TayfaImage" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="@item.TayfaName" /></a>
+                @*@Html.ActionLink(@item.CharacterName,"CharacterDetail","Home")*@
+            </div>
+            <h2 class="entry-title"><a href="/Home/TayfalarDetail/@item.TayfaId" rel="bookmark">@item.TayfaName</a></h2>
+
+        </header>
+
+
+
+    </article>
+
+}
+
+
+

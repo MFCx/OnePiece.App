@@ -22,6 +22,16 @@
           <Property Name="CharacterPower" Type="nvarchar" MaxLength="50" />
           <Property Name="TayfaId" Type="int" Nullable="false" />
           <Property Name="MainPicture" Type="nvarchar(max)" />
+          <Property Name="CharacterDescription" Type="nvarchar(max)" />
+          <Property Name="CharacterBounty" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adress" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Images">
           <Key>
@@ -30,6 +40,25 @@
           <Property Name="ImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ImageUrl" Type="nvarchar(max)" />
           <Property Name="CharacterId" Type="int" />
+        </EntityType>
+        <EntityType Name="Order_Details">
+          <Key>
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="CharacterId" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="CharacterId" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="smallint" />
+          <Property Name="Discount" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="OrderDate" Type="datetime" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -47,6 +76,7 @@
           </Key>
           <Property Name="TayfaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TayfaName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TayfaImage" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_Characters_Tayfalar">
           <End Role="Tayfalar" Type="Self.Tayfalar" Multiplicity="1" />
@@ -72,10 +102,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Order_Details_Characters">
+          <End Role="Characters" Type="Self.Characters" Multiplicity="1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Characters">
+              <PropertyRef Name="CharacterId" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="CharacterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Details_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="OnePieceDbModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Characters" EntityType="Self.Characters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Details" EntityType="Self.Order_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tayfalar" EntityType="Self.Tayfalar" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Characters_Tayfalar" Association="Self.FK_Characters_Tayfalar">
@@ -85,6 +154,18 @@
           <AssociationSet Name="FK_Images_Characters" Association="Self.FK_Images_Characters">
             <End Role="Characters" EntitySet="Characters" />
             <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Details_Characters" Association="Self.FK_Order_Details_Characters">
+            <End Role="Characters" EntitySet="Characters" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Details_Orders" Association="Self.FK_Order_Details_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Customers" Association="Self.FK_Orders_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -109,8 +190,20 @@
           <Property Name="CharacterPower" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TayfaId" Type="Int32" Nullable="false" />
           <Property Name="MainPicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CharacterDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CharacterBounty" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Tayfalar" Relationship="Self.FK_Characters_Tayfalar" FromRole="Characters" ToRole="Tayfalar" />
           <NavigationProperty Name="Images" Relationship="Self.FK_Images_Characters" FromRole="Characters" ToRole="Images" />
+          <NavigationProperty Name="Order_Details" Relationship="Self.FK_Order_Details_Characters" FromRole="Characters" ToRole="Order_Details" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Customers" FromRole="Customers" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
@@ -120,6 +213,29 @@
           <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CharacterId" Type="Int32" />
           <NavigationProperty Name="Character" Relationship="Self.FK_Images_Characters" FromRole="Images" ToRole="Characters" />
+        </EntityType>
+        <EntityType Name="Order_Details">
+          <Key>
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="CharacterId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="CharacterId" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="Int16" />
+          <Property Name="Discount" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Character" Relationship="Self.FK_Order_Details_Characters" FromRole="Order_Details" ToRole="Characters" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Details_Orders" FromRole="Order_Details" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Orders_Customers" FromRole="Orders" ToRole="Customers" />
+          <NavigationProperty Name="Order_Details" Relationship="Self.FK_Order_Details_Orders" FromRole="Orders" ToRole="Order_Details" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -137,6 +253,7 @@
           </Key>
           <Property Name="TayfaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TayfaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TayfaImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Characters" Relationship="Self.FK_Characters_Tayfalar" FromRole="Tayfalar" ToRole="Characters" />
         </EntityType>
         <Association Name="FK_Characters_Tayfalar">
@@ -163,10 +280,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="OnePieceDbContext1" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_Order_Details_Characters">
+          <End Role="Characters" Type="Self.Character" Multiplicity="1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Characters">
+              <PropertyRef Name="CharacterId" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="CharacterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Details_Orders">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+          <End Role="Order_Details" Type="Self.Order_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Order_Details">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnePieceDbContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Characters" EntityType="Self.Character" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Images" EntityType="Self.Image" />
+          <EntitySet Name="Order_Details" EntityType="Self.Order_Details" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Tayfalars" EntityType="Self.Tayfalar" />
           <AssociationSet Name="FK_Characters_Tayfalar" Association="Self.FK_Characters_Tayfalar">
@@ -177,13 +333,25 @@
             <End Role="Characters" EntitySet="Characters" />
             <End Role="Images" EntitySet="Images" />
           </AssociationSet>
+          <AssociationSet Name="FK_Order_Details_Characters" Association="Self.FK_Order_Details_Characters">
+            <End Role="Characters" EntitySet="Characters" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Customers" Association="Self.FK_Orders_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Details_Orders" Association="Self.FK_Order_Details_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Order_Details" EntitySet="Order_Details" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="OnePieceDbModelStoreContainer" CdmEntityContainer="OnePieceDbContext1">
+        <EntityContainerMapping StorageEntityContainer="OnePieceDbModelStoreContainer" CdmEntityContainer="OnePieceDbContext">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="OnePieceDbModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
@@ -201,6 +369,17 @@
                 <ScalarProperty Name="CharacterPower" ColumnName="CharacterPower" />
                 <ScalarProperty Name="TayfaId" ColumnName="TayfaId" />
                 <ScalarProperty Name="MainPicture" ColumnName="MainPicture" />
+                <ScalarProperty Name="CharacterDescription" ColumnName="CharacterDescription" />
+                <ScalarProperty Name="CharacterBounty" ColumnName="CharacterBounty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="OnePieceDbModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -210,6 +389,26 @@
                 <ScalarProperty Name="ImageId" ColumnName="ImageId" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="CharacterId" ColumnName="CharacterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Details">
+            <EntityTypeMapping TypeName="OnePieceDbModel.Order_Details">
+              <MappingFragment StoreEntitySet="Order_Details">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="CharacterId" ColumnName="CharacterId" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="OnePieceDbModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -229,6 +428,7 @@
               <MappingFragment StoreEntitySet="Tayfalar">
                 <ScalarProperty Name="TayfaId" ColumnName="TayfaId" />
                 <ScalarProperty Name="TayfaName" ColumnName="TayfaName" />
+                <ScalarProperty Name="TayfaImage" ColumnName="TayfaImage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

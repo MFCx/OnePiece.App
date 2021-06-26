@@ -16,7 +16,7 @@ namespace OnePiece.DataAccess.Concrete.EntityFramework
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
-            using (var context = new OnePieceDbContext1())
+            using (var context = new OnePieceDbContext())
             {
                 return context.Set<TEntity>().FirstOrDefault(filter);
             }
@@ -25,7 +25,7 @@ namespace OnePiece.DataAccess.Concrete.EntityFramework
 
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter=null)
         {
-            using (var context = new OnePieceDbContext1())
+            using (var context = new OnePieceDbContext())
             {
                 return filter == null ? context.Set<TEntity>().ToList()
                     : context.Set<TEntity>().Where(filter).ToList();
@@ -34,7 +34,7 @@ namespace OnePiece.DataAccess.Concrete.EntityFramework
 
         public TEntity Add(TEntity entity)
         {
-            using (var context = new OnePieceDbContext1())
+            using (var context = new OnePieceDbContext())
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
@@ -47,7 +47,7 @@ namespace OnePiece.DataAccess.Concrete.EntityFramework
 
         public void Delete(TEntity entity)
         {
-            using (var context = new OnePieceDbContext1())
+            using (var context = new OnePieceDbContext())
             {
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
@@ -57,7 +57,7 @@ namespace OnePiece.DataAccess.Concrete.EntityFramework
 
         public TEntity Update(TEntity entity)
         {
-            using (var context = new OnePieceDbContext1())
+            using (var context = new OnePieceDbContext())
             {
                 var uptadedEntity = context.Entry(entity);
                 uptadedEntity.State = EntityState.Modified;

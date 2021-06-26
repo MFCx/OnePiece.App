@@ -9,5 +9,7 @@ namespace OnePiece.Business.Abstract
     {
         List<Character> HakiKullananKarakterler(Expression<Func<Character,bool>>filter);
         List<Character> GetirCharacterTayfaIle(Expression<Func<Character, bool>> filter=null);
+        Character resimlerleCharacter(Expression<Func<Character, bool>> filter);
+        Character CharacterSatinAl(Expression<Func<Character, bool>> filter);
     }
 }

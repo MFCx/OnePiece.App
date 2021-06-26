@@ -1,1 +1,78 @@
-﻿
+﻿@using OnePiece.Entities.Database
+@model Character
+
+
+<div class="container">
+    <!-- #masthead -->
+    <div id="content" class="site-content">
+        <div id="primary" class="content-area column two-thirds single-portfolio">
+            <main id="main" class="site-main">
+                <div class="row">
+                    <article class="portfolio hentry col-md-3">
+                        <header class="entry-header">
+                            @if (@Model.Images.Count==0)
+                            {
+                                <img width="150" height="150" src="~/wwwroot/images/Characters/@Model.MainPicture" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="p1"/>
+
+                            }
+                            @foreach (var image in @Model.Images)
+                            {
+                                <tr>
+                                    <td>
+                                        <img width="150" height="150" src="~/wwwroot/images/Characters/@Model.CharacterName/@image.ImageUrl" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="p1"/>
+                                    </td>
+                                </tr>
+                            }
+                            <h1 class="entry-title">@Model.CharacterName</h1>
+                            <a class='portfoliotype' href='/Home/TayfalarDetail/@Model.Tayfalar.TayfaId'>@Model.Tayfalar.TayfaName </a>
+                            <a class='portfoliotype' href='portfolio-category.html'>@Model.CharacterPower</a>
+                            <a class='portfoliotype'>Değer:@Model.CharacterBounty</a>
+                            <a href="/Home/SepeteEkle/@Model.CharacterId"> Sepete Ekle</a>
+                        </header>
+                        <div class="entry-content col-md-9">
+                            <p>
+                                @Model.CharacterDescription
+                            </p>
+
+                        </div>
+                    </article>
+                </div>
+
+                <nav class="navigation post-navigation" role="navigation">
+                    <h1 class="screen-reader-text">Post navigation</h1>
+                    <div class="nav-links">
+                        <div class="nav-previous">
+                            <a href="#" rel="prev"> <span class="meta-nav">←</span> Eliza and John</a>
+                        </div>
+
+                    </div>
+                </nav>
+                <!-- .navigation -->
+
+            </main>
+            <!-- #main -->
+        </div>
+        <!-- #primary -->
+
+        <div id="secondary" class="column third">
+            <div class="widget-area">
+                <aside class="widget">
+                    <h4 class="widget-title">Request similar project</h4>
+                    <form class="wpcf7" method="post" action="contact.php" id="contactform">
+                        <div class="form">
+                            <p><input type="text" name="name" placeholder="Name *"></p>
+                            <p><input type="text" name="email" placeholder="E-mail Address *"></p>
+                            <p><textarea name="comment" rows="3" placeholder="Message *"></textarea></p>
+                            <input type="submit" id="submit" class="clearfix btn" value="Send">
+                        </div>
+                    </form>
+                    <div class="done">
+                        Your message has been sent. Thank you!
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+    <!-- #content -->
+</div>
+<!-- .container -->

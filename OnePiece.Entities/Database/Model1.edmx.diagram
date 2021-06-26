@@ -4,14 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5d9d4492d0b34d66b56fb00ce408f8ad" Name="Diagram1">
-        <EntityTypeShape EntityType="OnePieceDbModel.Admin" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnePieceDbModel.Character" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnePieceDbModel.Image" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnePieceDbModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnePieceDbModel.Tayfalar" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+      <Diagram DiagramId="0c9f0c10507e4b41b669027da2cf1ceb" Name="Diagram1">
+        <EntityTypeShape EntityType="OnePieceDbModel.Admin" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnePieceDbModel.Character" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnePieceDbModel.Customer" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnePieceDbModel.Image" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnePieceDbModel.Order_Details" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnePieceDbModel.Order" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnePieceDbModel.sysdiagram" Width="1.5" PointX="7.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnePieceDbModel.Tayfalar" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <AssociationConnector Association="OnePieceDbModel.FK_Characters_Tayfalar" ManuallyRouted="false" />
         <AssociationConnector Association="OnePieceDbModel.FK_Images_Characters" ManuallyRouted="false" />
+        <AssociationConnector Association="OnePieceDbModel.FK_Order_Details_Characters" ManuallyRouted="false" />
+        <AssociationConnector Association="OnePieceDbModel.FK_Orders_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="OnePieceDbModel.FK_Order_Details_Orders" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

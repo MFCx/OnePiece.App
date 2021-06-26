@@ -50,6 +50,16 @@ namespace OnePiece.Business.Concrete
             return _characterDal.GetirCharacterTayfaIle(filter);
         }
 
+        public Character resimlerleCharacter(Expression<Func<Character, bool>> filter)
+        {
+            return _characterDal.resimlerleCharacter(filter);
+        }
+
+        public Character CharacterSatinAl(Expression<Func<Character, bool>> filter)
+        {
+            return _characterDal.CharacterSatinAl(filter);
+        }
+
         public List<Character> GetAll(Expression<Func<Character, bool>> filter = null)
         {
             return filter == null ? _characterDal.GetAll() : _characterDal.GetAll(filter);

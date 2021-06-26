@@ -14,12 +14,13 @@ namespace OnePiece.Entities.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Character:IEntity
+    public partial class Character : IEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Character()
         {
             this.Images = new HashSet<Image>();
+            this.Order_Details = new HashSet<Order_Details>();
         }
     
         public int CharacterId { get; set; }
@@ -27,9 +28,13 @@ namespace OnePiece.Entities.Database
         public string CharacterPower { get; set; }
         public int TayfaId { get; set; }
         public string MainPicture { get; set; }
+        public string CharacterDescription { get; set; }
+        public Nullable<decimal> CharacterBounty { get; set; }
     
         public virtual Tayfalar Tayfalar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Images { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order_Details> Order_Details { get; set; }
     }
 }

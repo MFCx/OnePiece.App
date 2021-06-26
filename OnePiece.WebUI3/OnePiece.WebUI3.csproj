@@ -137,10 +137,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MarketController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddToCartModel.cs" />
     <Compile Include="Models\CharacterListModel.cs" />
+    <Compile Include="Models\TayfaKarakter.cs" />
+    <Compile Include="Models\TayfalarListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewComponents\TayfalarComponent.cs" />
   </ItemGroup>
@@ -156,11 +160,19 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="wwwroot\images\Characters\Derya.jpg" />
     <Content Include="wwwroot\images\Characters\franky.jpg" />
     <Content Include="wwwroot\images\Characters\luffy.jpg" />
+    <Content Include="wwwroot\images\Characters\Luffy\luffy1.jpg" />
+    <Content Include="wwwroot\images\Characters\Luffy\luffy2.jpg" />
+    <Content Include="wwwroot\images\Characters\Luffy\luffy3.jpg" />
+    <Content Include="wwwroot\images\Characters\Luffy\luffy4.jpg" />
     <Content Include="wwwroot\images\Characters\nami.jpg" />
     <Content Include="wwwroot\images\Characters\sanji.jpg" />
     <Content Include="wwwroot\images\Characters\zoro.jpg" />
+    <Content Include="wwwroot\images\Tayfalar\BigMomKorsanlari.jpg" />
+    <Content Include="wwwroot\images\Tayfalar\KujaKorsanlari.jpg" />
+    <Content Include="wwwroot\images\Tayfalar\GoldDRogerTayfasi.jpg" />
     <Content Include="wwwroot\Template\Moschino Free Website Template - Free-CSS.com\HTML-Moschino1.0.0\about.html" />
     <Content Include="wwwroot\Template\Moschino Free Website Template - Free-CSS.com\HTML-Moschino1.0.0\blog-single.html" />
     <Content Include="wwwroot\Template\Moschino Free Website Template - Free-CSS.com\HTML-Moschino1.0.0\blog.html" />
@@ -214,7 +226,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\TayfalarDetail.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="wwwroot\Template\Moschino Free Website Template - Free-CSS.com\HTML-Moschino1.0.0\fonts\behance.eot" />
     <Content Include="wwwroot\Template\Moschino Free Website Template - Free-CSS.com\HTML-Moschino1.0.0\fonts\behance.ttf" />
@@ -230,9 +242,14 @@
     <Content Include="Views\Home\CharacterDetail.cshtml" />
     <Content Include="Views\Shared\_navbar.cshtml" />
     <Content Include="Views\Shared\_footer.cshtml" />
+    <Content Include="Views\Home\Tayfalar.cshtml" />
+    <Content Include="Views\Market\Index.cshtml" />
+    <Content Include="Views\Home\SepeteEkle.cshtml" />
+    <Content Include="Views\Home\CharacterAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="wwwroot\images\Characters\Zoro\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

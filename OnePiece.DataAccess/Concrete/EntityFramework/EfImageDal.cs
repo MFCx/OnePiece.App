@@ -15,7 +15,7 @@ namespace OnePiece.DataAccess.Concrete.EntityFramework
     {
         public List<Image> GetirImageile(Expression<Func<Image,bool>> filter = null)
         {
-            using (var context = new OnePieceDbContext1())
+            using (var context = new OnePieceDbContext())
             {
                 return null;
 

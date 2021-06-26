@@ -16,6 +16,11 @@
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all' />
 
     <link href="~/wwwroot/Template/Moschino Free Website Template - Free-CSS.com/HTML-Moschino1.0.0/css/easy-responsive-shortcodes.css" rel="stylesheet" />
+ 
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body class="home page page-template page-template-template-portfolio page-template-template-portfolio-php">
     <div id="page">
@@ -23,9 +28,19 @@
             <header id="masthead" class="site-header">
                 <div class="site-branding">
                     <h1 class="site-title"><a href="/Home/Index" rel="home">One Piece</a></h1>
-                    <h2 class="site-description">Minimalist Portfolio HTML Template</h2>
+                    <h2 class="site-description">MFC & Vampirella</h2>
                 </div>
-               @Html.Partial("_navbar")
+                <nav id="site-navigation" class="main-navigation">
+                    <button class="menu-toggle">Menu</button>
+                    <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+                    <div class="menu-menu-1-container">
+                        <ul id="menu-menu-1" class="menu">
+                            @Html.Partial("_navbar")
+                        </ul>
+                    </div>
+                </nav>
+
+
             </header>
             <!-- #masthead -->
             <div id="content" class="site-content">
@@ -35,12 +50,12 @@
                             @RenderBody()
                         </div>
                         <!-- .grid -->
-                      
-                        <nav class="pagination">
+
+                        @*<nav class="pagination">
                             <span class="page-numbers current">1</span>
                             <a class="page-numbers" href="#">2</a>
                             <a class="next page-numbers" href="#">Next »</a>
-                        </nav>
+                        </nav>*@
                         <br />
 
                     </main>
@@ -50,9 +65,14 @@
             </div>
             <!-- #content -->
         </div>
+
+
+ 
+
         <!-- .container -->
-     @Html.Partial("_footer")
-        <a href="#top" class="smoothup" title="Back to top"><span class="genericon genericon-collapse"></span></a>
+      @Html.Partial("_footer")
+
+        
     </div>
     <!-- #page -->
     <script src="~/wwwroot/Template/Moschino Free Website Template - Free-CSS.com/HTML-Moschino1.0.0/js/jquery.js"></script>
